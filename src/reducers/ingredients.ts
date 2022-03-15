@@ -16,9 +16,8 @@ const ingredientSlice = createSlice({
             const { id,name,quantity } = action.payload;
             state.ingredients.push({id,name,quantity});
         },
-        removeIngredient: (state, action: PayloadAction<Ingredient>) => {
-            const { id } = action.payload;
-            state.ingredients.filter(item => item.id !== id);
+        removeIngredient: (state, action: PayloadAction<number>) => {
+            state.ingredients.filter(item => item.id !== action.payload);
         },
         increaseQuantity: (state, action: PayloadAction<number>) => {
             state.ingredients.map((item) => {

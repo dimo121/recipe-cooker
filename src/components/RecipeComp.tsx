@@ -10,7 +10,7 @@ interface IRecipeProps {
     }
 }
 
-export const IndividualRecipe:React.FC<IRecipeProps> = (props) => {
+export const RecipeComp:React.FC<IRecipeProps> = (props) => {
 
     const { name, list, method } = props.recipe;
 
