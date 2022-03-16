@@ -6,7 +6,7 @@ interface IRecipeProps {
     recipe: {
         name: string,
         method: string,
-        list: Ingredient[]
+        list: Map<string,number>
     }
 }
 
@@ -16,13 +16,18 @@ export const RecipeComp:React.FC<IRecipeProps> = (props) => {
 
     return (
         <div className="recipe-ind">
-            <p>{name}</p>
-            <p>{method}</p>
+            <p>Name : {name}</p>
+            <p>Method : {method}</p>
             <p>Ingredients :</p>
             <ul>
-                {list.map((ing:Ingredient) => <li><IngComp ingredient={{...ing}} /></li>)}
+            {
+                list.forEach((value,key) => { 
+                    return <li><IngComp ingredient={{name:key, quantity:value}} /></li>
+                })
+            }
             </ul>
             <button>Cook Recipe</button>
+            <button>Delete Recipe</button>
         </div>
     );
 }

@@ -1,15 +1,16 @@
 
 
-export type Ingredient = {
-    id: number,
+export type newIngredient = {
     name: string,
     quantity: number
-};
+}
+
+export type Ingredients = Map<string,number>;
 
 export type Recipe = {
-    id: number,
+    id: string,
     name: string,
-    list: Ingredient[],
+    list: Map<string,number>,
     method: string
 }
 
@@ -17,7 +18,7 @@ export type HistoryItem = {
     id: number
     recipeName: string,
     timeCooked: string,
-    ingredientsUsed: Ingredient[]
+    ingredientsUsed: Ingredients
 }
 
 export type CookingHistory = HistoryItem[];

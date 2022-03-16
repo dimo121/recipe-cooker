@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Ingredient, Recipe } from '../types/TypeDefs';
-import { createRecipe } from '../actions/recipe-actions';
+import { recipeSlice } from '../slices/recipes';
 import { RecipeComp } from '../components/RecipeComp';
+import { useAppDispatch } from '../store/store';
+import { nanoid } from '@reduxjs/toolkit';
 
-export const Recipes:React.FC = () => {
-    
-    useEffect(() => {
 
-    setRecipes(JSON.parse(localStorage.getItem('recipes') as string ) as Recipe[]);
-
-    },[]);
+const Recipes:React.FC = () => {
 
     const [name,setName] = useState<string>('testing');
     const [method,setMethod] = useState<string>('Add sugar on top');
@@ -20,13 +17,39 @@ export const Recipes:React.FC = () => {
     ]);
     const [recipesCollection, setRecipes] = useState<Recipe[]>([]);
 
-    const onAddRecipe = () => {
-        console.log('Adding recipe');
-        createRecipe(
+    const dispatch = useAppDispatch();
+
+
+    useEffect(() => {
+
+        const recipesFromLocalStorage:Recipe[] = JSON.parse(localStorage.getItem('recipes') as string);
+
+        if(recipesFromLocalStorage){
+            dispatch(recipeSlice.actions.setRecipes(recipesFromLocalStorage));
+            setRecipes(recipesFromLocalStorage);
+        }
+
+    },[]);
+
+    useEffect(() => {
+        if(recipesCollection)
+            localStorage.setItem('recipes', JSON.stringify(recipesCollection));
+    },[recipesCollection]);
+
+    
+    const OnAddRecipe = () => {
+        
+        const newRecipe = {  
+            id: nanoid(),
             name,
-            ingredientsCollection,
-            method,
-        );
+            list:ingredientsCollection,
+            method
+        };
+
+        dispatch(recipeSlice.actions.createRecipe(newRecipe));
+
+        setRecipes([ ...recipesCollection, newRecipe]);   
+
     }
 
     return (
@@ -43,7 +66,7 @@ export const Recipes:React.FC = () => {
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
                 ></input>
                 <br/>
-                <label htmlFor='name'>Method: </label>
+                <label htmlFor='method'>Method: </label>
                 <br/>
                 <input type='text' id='method' name='method'
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMethod(e.target.value)}
@@ -53,21 +76,31 @@ export const Recipes:React.FC = () => {
                 <label htmlFor='name'>Ingredients: </label>
                 <br/>
                 <div className='ingredients-table'>
-                    <input type='text' id='ing1' name='ing1'
-                    ></input>
-                    <input type='text' id='ing2' name='ing2'
-                    ></input>
+                    <span>
+                        <div>
+                            <label htmlFor='ing1'>Name: </label>
+                            <br />
+                            <input type='text' id='ing1' name='ing1'
+                            ></input>
+                        </div>
+                    </span>
+                    <span>
+                        <div>
+                            <label htmlFor='ing2'>Quantity: </label>
+                            <br />
+                            <input type='text' id='ing2' name='ing2'
+                            ></input>
+                        </div>
+                    </span>
                 </div>
                 <br/>
                 <br/>
-                <button onClick={() => setIngredients([
-                    {id:1,name:'banana',quantity:2},
-                    {id:2,name:'fudge sauce',quantity:1},
-                    {id:3,name:'sugar',quantity:1}]
+                <button onClick={() => setIngredients([]
                 )}>Reset Ingredients</button>
-                <button onClick={onAddRecipe}>Add Recipe</button>
-                <button>Remove Recipe</button>
+                <button onClick={OnAddRecipe}>Add Recipe</button>
             </div>
         </div>
     );
 }
+
+export default Recipes;

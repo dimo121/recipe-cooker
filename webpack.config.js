@@ -45,7 +45,7 @@ module.exports = {
   plugins: [
     new ForkTsCheckerWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Your project name',
+      title: 'Recipe Cooker',
       template: './src/index.html',
       filename: './index.html'
     })

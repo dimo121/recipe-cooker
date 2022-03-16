@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import ingredientsSliceReducer from '../reducers/ingredients';
-import recipesSliceReducer from '../reducers/recipes';
+import ingredientsSliceReducer from '../slices/ingredients';
+import recipesSliceReducer from '../slices/recipes';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 

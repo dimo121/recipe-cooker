@@ -1,20 +1,20 @@
-import { Ingredient } from "../types/TypeDefs";
-
+import { Ingredients } from "../types/TypeDefs";
+import { newIngredient } from "../types/TypeDefs";
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface ingredientsState {
-    ingredients: Ingredient[]
+    ingredients: Ingredients
 }
 
-const initialState = { ingredients:[] } as ingredientsState;
+const initialState = { ingredients: new Map() } as ingredientsState;
 
 const ingredientSlice = createSlice({
     name: 'ingredients',
     initialState,
     reducers: {
-        addIngredient: (state,action:PayloadAction<Ingredient>) => {
-            const { id,name,quantity } = action.payload;
-            state.ingredients.push({id,name,quantity});
+        addIngredient: (state,action:PayloadAction<newIngredient>) => {
+            const { name,quantity } = action.payload;
+            state.ingredients.push({name,quantity});
         },
         removeIngredient: (state, action: PayloadAction<number>) => {
             state.ingredients.filter(item => item.id !== action.payload);

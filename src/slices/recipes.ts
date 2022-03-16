@@ -8,7 +8,7 @@ interface recipesState {
 
 const initialState = { recipes:[] } as recipesState;
 
-const recipeSlice = createSlice({
+export const recipeSlice = createSlice({
     name: 'recipes',
     initialState,
     reducers: {
@@ -16,7 +16,7 @@ const recipeSlice = createSlice({
             const { id,name,list,method } = action.payload;
             state.recipes.push({id,name,list,method});
         },
-        deleteRecipe: (state,action:PayloadAction<number>) => {
+        deleteRecipe: (state,action:PayloadAction<string>) => {
             state.recipes.filter(recipe => recipe.id !== action.payload);
         },
         setRecipes: (state,action:PayloadAction<Recipe[]>) => {

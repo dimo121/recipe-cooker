@@ -7,7 +7,7 @@ import { Route, Router, Switch }  from 'react-router-dom';
 
 import { Cooker } from '../components/Cooker';
 import { Pantry } from '../components/Pantry';
-import { Recipes } from '../components/Recipes'; 
+import Recipes from '../components/Recipes'; 
 import { Footer } from '../components/Footer';
 
 const AppRouter:React.FC = () => {
