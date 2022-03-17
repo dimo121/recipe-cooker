@@ -15,45 +15,39 @@ export const Cooker:React.FC = () => {
               id: 1,
               recipeName: 'pasta',
               timeCooked: new Date('2022-03-15').toDateString(),
-              ingredientsUsed: [
-                  {
-                      id:1,
-                      name: 'pasta',
-                      quantity: 1
-                  },
-                  {
-                      id:2,
-                      name: 'olive oil',
-                      quantity: 1
-                  },
-                  {
-                      id:3,
-                      name: 'sauce',
-                      quantity: 1
-                  }
-              ]
+              ingredientsUsed: new Map([
+                  [
+                      'pasta',
+                      1
+                  ],
+                  [
+                      'olive oil',
+                      1
+                  ],
+                  [
+                      'sauce',
+                      1
+                  ]
+                ])    
           },
           {
               id: 2,
               recipeName: 'salad',
               timeCooked: new Date('2022-03-16').toDateString(),
-              ingredientsUsed: [
-                  {
-                    id:1,
-                      name: 'lettuce',
-                      quantity: 1
-                  },
-                  {
-                    id:2,
-                      name: 'tomato',
-                      quantity: 1
-                  },
-                  {
-                    id:3,
-                      name: 'onion',
-                      quantity: 1
-                  }
-              ]
+              ingredientsUsed: new Map([
+                  [
+                      'lettuce',
+                      1
+                  ],
+                  [
+                      'tomato',
+                      1
+                  ],
+                  [
+                      'onion',
+                      1
+                  ]
+                ])
           }
       ]);
 

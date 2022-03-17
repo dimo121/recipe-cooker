@@ -1,18 +1,16 @@
 import React from 'react';
-import { Ingredient } from '../types/TypeDefs';
+//import { newIngredient } from '../types/TypeDefs';
 
 interface IngCompProps {
-    ingredient : Ingredient
+    ingredient : any
 }
 
 export const IngComp:React.FC<IngCompProps> = (props) => {
-    
-    const { name, quantity } = props.ingredient;
-     
+
     return (
         <div className="ingredient">
-            <p>{name}</p>
-            <p>Quantity: {quantity}</p>   
+            <p>Name: {props.ingredient[0]}</p>
+            <p>Quantity: {props.ingredient[1]}</p>   
         </div>
     );
 }

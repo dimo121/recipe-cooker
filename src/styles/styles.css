@@ -1,2 +1,9 @@
 .ingredients-table {
-  display: flex; }
+  display: grid;
+  grid-template-columns: 10em 10em;
+  grid-template-rows: repeat(15); }
+
+.pantry-items {
+  display: grid;
+  grid-template-columns: repeat(3, 10em);
+  grid-template-rows: repeat(5); }

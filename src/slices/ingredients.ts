@@ -14,39 +14,32 @@ const ingredientSlice = createSlice({
     reducers: {
         addIngredient: (state,action:PayloadAction<newIngredient>) => {
             const { name,quantity } = action.payload;
-            state.ingredients.push({name,quantity});
+            state.ingredients.set(name,quantity);
         },
-        removeIngredient: (state, action: PayloadAction<number>) => {
-            state.ingredients.filter(item => item.id !== action.payload);
+        removeIngredient: (state, action: PayloadAction<string>) => {
+            state.ingredients.delete(action.payload);
         },
-        increaseQuantity: (state, action: PayloadAction<number>) => {
-            state.ingredients.map((item) => {
-                if(item.id === action.payload){
-                return {
-                    ...item,
-                    quantity: item.quantity + 1
-                }
-            } else {
-                return item
-            }})
+        increaseQuantity: (state, action: PayloadAction<newIngredient>) => {
+            const { name, quantity } = action.payload;
+
+            const newQuantity:number = state.ingredients.get(name)! + quantity
+            state.ingredients.set(name,newQuantity);
+        
         },
-        decreaseQuantity: (state, action: PayloadAction<number>) => {
-            state.ingredients.map((ingredient) => {
-                if(ingredient.id === action.payload){
-                    if(ingredient.quantity > 1){
-                        return {
-                            ...ingredient,
-                            quantity: ingredient.quantity - 1
-                        }
-                    } else {
-                        return null
-                    }
-                } else {
-                    return ingredient
-                }
-            })
+        decreaseQuantity: (state, action: PayloadAction<newIngredient>) => {
+            
+            const { name, quantity } = action.payload;
+
+            const currentQuantity:number = state.ingredients.get(name)!;
+
+            if(currentQuantity > quantity){
+                const newQuantity:number = currentQuantity - quantity;
+                state.ingredients.set(name,newQuantity);
+            }else if (currentQuantity === quantity){
+                state.ingredients.delete(name);
+            }
         },
-        setIngredients: (state, action: PayloadAction<Ingredient[]>) => {
+        setIngredients: (state, action: PayloadAction<Ingredients>) => {
             state.ingredients = action.payload
         }
     }

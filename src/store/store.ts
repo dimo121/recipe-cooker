@@ -1,13 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import ingredientsSliceReducer from '../slices/ingredients';
 import recipesSliceReducer from '../slices/recipes';
+import errorSliceReducer from '../slices/error';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 
 export const store = configureStore({
     reducer: {
         recipes: recipesSliceReducer,
-        ingredients: ingredientsSliceReducer
+        ingredients: ingredientsSliceReducer,
+        error: errorSliceReducer
     },
     devTools: true
 });
