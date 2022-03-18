@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { Recipe } from '../types/TypeDefs';
+import { Ingredients, Recipe } from '../types/TypeDefs';
 import { recipeSlice } from '../slices/recipes';
 import { RecipeComp } from '../components/RecipeComp';
-import { useAppDispatch } from '../store/store';
+import { useAppDispatch, useAppSelector } from '../store/store';
 import { nanoid } from '@reduxjs/toolkit';
 
 const Recipes:React.FC = () => {
 
     const [name,setName] = useState<string>('testing');
     const [method,setMethod] = useState<string>('Add sugar on top');
-    const [ingredientsCollection, setIngredients] = useState<Map<string,number>>(new Map());
-    const [recipesCollection, setRecipes] = useState<Recipe[]>([]);
+    const [error,setError] = useState<string>('');
+    const [ingredientsCollection,setIngredients] = useState<Ingredients>({})
+    const [recipesDisplay,setRecipes] = useState<Recipe[]>([]);
 
     const dispatch = useAppDispatch();
+
+    const recipesState = useAppSelector(state => state.recipes);
 
     useEffect(() => {
 
@@ -20,72 +23,54 @@ const Recipes:React.FC = () => {
 
         if(recipesFromLocalStorage){
             dispatch(recipeSlice.actions.setRecipes(recipesFromLocalStorage));
-            setRecipes(recipesFromLocalStorage);
         }
 
     },[]);
 
 
     useEffect(() => {
-        if(recipesCollection)
-            localStorage.setItem('recipes', JSON.stringify(recipesCollection));
-    },[recipesCollection]);
+        setRecipes(recipesState.recipes);
+    },[recipesState])
 
 
-    useEffect(() => {
-        console.log('Map from useEffect ',ingredientsCollection);
-    },[ingredientsCollection])
-
-
-    const OnAddRecipe = () => {
-        
-        const newRecipe = {  
-            id: nanoid(),
-            name,
-            list:ingredientsCollection,
-            method
-        };
-
-        dispatch(recipeSlice.actions.createRecipe(newRecipe));
-
-        setRecipes([ ...recipesCollection, newRecipe]);   
-        setName('');
-        setMethod('');
-
-    }
-
-
-    const handleMapChange = (e:any) => {
+    const updateIngredients = (e:any) => {
 
         const num = parseInt(e.target.id);
 
         console.log('Id: ',num);
 
-        console.log('Map on handler entry:', ingredientsCollection);
+        console.log('Object on handler entry:', ingredientsCollection);
 
         if(num%2 === 0){
             const element = document.getElementById(`${num-1}`)! as HTMLInputElement; 
             //find name of value being changed from previous element
             const name = element.value;
             
-            setIngredients(new Map(ingredientsCollection.set(name,parseInt(e.target.value))));
+            const newCollection = Object.assign({},ingredientsCollection);
+
+            newCollection[name] = parseInt(e.target.value);
+            
+            setIngredients(newCollection);
 
         }else{
             const element = document.getElementById(e.target.id)! as HTMLInputElement;
             //find key name
             const oldName = element.getAttribute('oldname');
-
+            //assign oldName attribute for next iteration
             element.setAttribute('oldName', e.target.value);
             //find corresponding value
             const corresElement = document.getElementById(`${num+1}`)! as HTMLInputElement 
 
-            let value:number = parseInt(corresElement.value)
+            let corresValue:number = parseInt(corresElement.value)
 
-            if(oldName) ingredientsCollection.delete(oldName);
+            const newCollection = Object.assign({}, ingredientsCollection);
 
-            const newCollection = new Map(ingredientsCollection.set(e.target.value,value));
-            
+            if(oldName) delete newCollection[oldName];
+
+            newCollection[e.target.value] = corresValue;
+
             setIngredients(newCollection);
+            
         }
 
     }
@@ -101,24 +86,39 @@ const Recipes:React.FC = () => {
         const nameElement = document.createElement('input');
         nameElement.setAttribute('type','text');
         nameElement.setAttribute('id',nameId); 
-        nameElement.addEventListener('input', handleMapChange, false);
+        nameElement.addEventListener('input', updateIngredients, false);
 
         const quantityElement = document.createElement('input');
         quantityElement.setAttribute('type','text');
         quantityElement.setAttribute('id',quantityId); 
-        quantityElement.addEventListener('input', handleMapChange, false);
+        quantityElement.addEventListener('input', updateIngredients, false);
 
         table.appendChild(nameElement);
         table.appendChild(quantityElement);
     }
 
+    const OnAddRecipe = () => {
+        
+        const newRecipe = {  
+            id: nanoid(),
+            name,
+            list:ingredientsCollection,
+            method
+        };
+
+        dispatch(recipeSlice.actions.createRecipe(newRecipe));
+
+        const newCollection = [...recipesState.recipes,newRecipe];
+
+        localStorage.setItem('recipes', JSON.stringify(newCollection));
+    }
 
     return (
         <div>
             <div className="">
                 <h1>Recipes list:</h1>
-                {recipesCollection?.map((item,idx) => 
-                    <RecipeComp key={idx} recipe={{...item}}/>
+                {recipesDisplay && recipesDisplay.map((item,idx) => 
+                    <RecipeComp key={idx} recipe={{...item}} setError={setError} />
                 )}
                 <h2>Add new recipe:</h2>
                 <label htmlFor='name'>Name : </label>
@@ -129,7 +129,7 @@ const Recipes:React.FC = () => {
                 <br/>
                 <label htmlFor='method'>Method: </label>
                 <br/>
-                <input type='text' id='method' name='method' value={method}
+                <input style={{ width:'80%', height:'5em'}} type='text' id='method' name='method' value={method}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMethod(e.target.value)}
                 ></input>
                 <br/>
@@ -140,40 +140,41 @@ const Recipes:React.FC = () => {
                     <label htmlFor='ing1'>Name: </label>
                     <label htmlFor='ing2'>Quantity: </label>
                     <input type='text' id='1'  
-                        onChange={handleMapChange}
+                        onChange={updateIngredients}
                     ></input>
                     <input type='text' id='2'  
-                        onChange={handleMapChange}
+                        onChange={updateIngredients}
                     ></input>
                     <input type='text' id='3'  
-                        onChange={handleMapChange}
+                        onChange={updateIngredients}
                     ></input>
                     <input type='text' id='4'  
-                        onChange={handleMapChange}
+                        onChange={updateIngredients}
                     ></input>
                     <input type='text' id='5'  
-                        onChange={handleMapChange}
+                        onChange={updateIngredients}
                     ></input>
                     <input type='text' id='6'  
-                        onChange={handleMapChange}
+                        onChange={updateIngredients}
                     ></input>
                     <input type='text' id='7'  
-                        onChange={handleMapChange}
+                        onChange={updateIngredients}
                     ></input>
                     <input type='text' id='8'  
-                        onChange={handleMapChange}
+                        onChange={updateIngredients}
                     ></input>
                     <input type='text' id='9'  
-                        onChange={handleMapChange}
+                        onChange={updateIngredients}
                     ></input>
                     <input type='text' id='10'  
-                        onChange={handleMapChange}
+                        onChange={updateIngredients}
                     ></input>
                 </div>
                 <button onClick={onAddIngredient}>Add Ingredient</button>
                 <br/>
                 <br/>
                 <button onClick={OnAddRecipe}>Add Recipe</button>
+                <p>{error}</p>
             </div>
         </div>
     );

@@ -7,11 +7,13 @@ interface IngCompProps {
 
 export const IngComp:React.FC<IngCompProps> = (props) => {
 
+    const { name, quantity } = props.ingredient;
+
     return (
-        <div className="ingredient">
-            <p>Name: {props.ingredient[0]}</p>
-            <p>Quantity: {props.ingredient[1]}</p>   
-        </div>
+        <>
+            <p>{name}</p>
+            <p>{quantity}</p>   
+        </>
     );
 }
 

@@ -6,17 +6,19 @@ export type newIngredient = {
 }
 
 
-export type Ingredients = Map<string,number>;
+export type Ingredients = {
+    [key:string]:number
+};
 
 export interface Recipe {
     id: string;
     name: string;
-    list: Map<string,number>;
+    list: Ingredients;
     method: string;
 }
 
 export interface HistoryItem {
-    id: number;
+    id: string;
     recipeName: string;
     timeCooked: string;
     ingredientsUsed: Ingredients;

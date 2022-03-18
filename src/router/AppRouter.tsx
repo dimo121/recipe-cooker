@@ -10,6 +10,10 @@ import { Pantry } from '../components/Pantry';
 import Recipes from '../components/Recipes'; 
 import { Footer } from '../components/Footer';
 
+//import { enableMapSet } from 'immer';
+
+//enableMapSet();
+
 const AppRouter:React.FC = () => {
   return (
         <Router history={history}>

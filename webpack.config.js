@@ -18,6 +18,7 @@ module.exports = {
   },
   target: 'web',
   mode: isProduction ? 'production' : 'development', 
+  module: {
     rules: [
       {
         test: /\.(tsx|ts)$/,
@@ -41,12 +42,12 @@ module.exports = {
         use: ['file-loader'],
       }, 
     ]
-  , 
+  }, 
   plugins: [
     new ForkTsCheckerWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Recipe Cooker',
-      template: './src/index.html',
+      template: './public/index.html',
       filename: './index.html'
     })
   ],

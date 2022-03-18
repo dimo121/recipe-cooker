@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { IngComp } from './IngComp';
 import { HistoryItem } from '../types/TypeDefs';
 
@@ -10,23 +10,30 @@ export const HistoryComp:React.FC<IHistoryCompProps> = (props) => {
 
     const { recipeName, timeCooked, ingredientsUsed } = props.item;
 
-    const [ingredientsArray,setIngredients] = useState<any[]>([]);
-
-    useEffect(() => {
-        const array = Array.from(ingredientsUsed);
-        setIngredients(array);
-    },[ingredientsUsed]);
+    //const [ingredientsCollection,setIngredients] = useState<Ingredients>({});
+   
+    // useEffect(() => {
+       
+    //     //setIngredients(ingredientsUsed);
+    // },[ingredientsUsed]);
 
     return (
         <div className="history-item">
             <p>Recipe: {recipeName}</p>
             <p>Time cooked: {timeCooked}</p>
             <h4>Ingredients used:</h4>
-            {
-                ingredientsArray.map((ing:[string,number], idx:number) =>
-                    <IngComp key={idx} ingredient={{...ing}} />   
-                )
-            }
+            <div className='ingredients-table'>
+                <label htmlFor='ing3'>Name: </label>
+                <label htmlFor='ing4'>Quantity: </label>
+                
+                {
+                    Object.keys(ingredientsUsed).map((keyName, idx) => {
+                        return (
+                            <IngComp key={idx} ingredient={{name:keyName,quantity:ingredientsUsed[keyName]}} />
+                        )
+                    })
+                }
+            </div>
         </div>
     );
 }
