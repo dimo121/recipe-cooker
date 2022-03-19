@@ -3,30 +3,29 @@ import React, { useEffect } from 'react';
 import { HistoryItem } from '../types/TypeDefs';
 import { HistoryComp } from './HistoryComp';
 import { useAppDispatch, useAppSelector } from '../store/store';
-import { historySlice } from '../slices/history';
 
+export const Cooker: React.FC = () => {
+    const dispatch = useAppDispatch();
 
-export const Cooker:React.FC = () => {
+    useEffect(() => {}, [dispatch]);
 
-  const dispatch = useAppDispatch();
+    const historyState = useAppSelector((state) => state.history);
 
-  useEffect(() => {
-    const historyFromLocalStorage = JSON.parse(localStorage.getItem('history') as string)
-    dispatch(historySlice.actions.setHistory(historyFromLocalStorage));
-  },[])
-  
-  const historyState = useAppSelector(state => state.history)
-
-  return (
-    <div className='cooker-wrapper'>
-      <div className="recipes-history">
-        <h1>Previous recipes cooked:</h1>
-        <div>
-          {historyState.history.map((item:HistoryItem, idx:number) => 
-              <HistoryComp key={idx} item={{...item}} />
-          )}
+    return (
+        <div className="cooker-wrapper">
+            <div className="recipes-history">
+                <div style={{ textAlign: 'center', margin: '1em 0' }}>
+                    <h1>Cooking History</h1>
+                </div>
+                <div className="card-wrapper">
+                    {historyState.history &&
+                        historyState.history.map(
+                            (item: HistoryItem, idx: number) => (
+                                <HistoryComp key={idx} item={{ ...item }} />
+                            )
+                        )}
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
-}
+    );
+};

@@ -1,9 +1,66 @@
+.history--card {
+  min-width: 15em;
+  margin-bottom: 2em; }
+  .history--card .card-title {
+    font-size: large;
+    font-weight: bold; }
+  .history--card .card-text {
+    padding: 1em; }
+
 .ingredients-table {
   display: grid;
   grid-template-columns: 10em 10em;
   grid-template-rows: repeat(15); }
 
-.pantry-items {
+.container {
+  height: 30em; }
+
+.card-wrapper {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.recipe--card {
+  min-width: 15em;
+  width: 15em; }
+  .recipe--card button {
+    font-size: medium;
+    margin-top: 1em;
+    min-width: 7em; }
+  .recipe--card .card-title {
+    font-size: large;
+    font-weight: bold; }
+  .recipe--card .card-text {
+    padding: 1em; }
+
+.center {
+  text-align: center; }
+
+.pantry-list__item {
   display: grid;
-  grid-template-columns: repeat(3, 10em);
+  grid-template-columns: repeat(3, 33%);
   grid-template-rows: 2em; }
+
+.pantry-list {
+  padding: 1em;
+  margin-left: 1em; }
+  .pantry-list input {
+    margin: 1rem auto; }
+
+.pantry--btn {
+  width: 7em; }
+
+@media (min-width: 320px) {
+  .pantry-items {
+    display: grid;
+    grid-template-columns: repeat(3, 33%);
+    grid-template-rows: 2em; } }
+
+.title {
+  display: inline;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 2.5em;
+  font-style: italic;
+  font-weight: bold;
+  margin-left: 1em; }

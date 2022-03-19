@@ -1,6 +1,30 @@
-.pantry-items {
+.center {
+    text-align: center;
+}
+
+.pantry-list__item {
     display: grid;
-    grid-template-columns: repeat(3, 10em);
+    grid-template-columns: repeat(3, 33%);
     grid-template-rows: 2em;
 }
 
+.pantry-list {
+    padding: 1em;
+    margin-left: 1em;
+
+    input {
+        margin: 1rem auto;
+    }
+}
+
+.pantry--btn {
+    width: 7em;
+}
+
+@media (min-width: 320px) {
+    .pantry-items {
+        display: grid;
+        grid-template-columns: repeat(3, 33%);
+        grid-template-rows: 2em;
+    }
+}

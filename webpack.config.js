@@ -31,10 +31,18 @@ module.exports = {
         }
       }, 
       { 
-        test: /\.css/,
-        use: [
-          'style-loader',
-          'css-loader'
+        test: /\.s?css/,
+        use: [{
+          loader:'style-loader',
+          },{
+          loader:'css-loader',
+        },{
+          loader:'sass-loader',
+        },{
+          loader:'postcss-loader',
+          options: { // postcss plugins, can be exported to postcss.config.js
+            plugins: () => require('autoprefixer')
+          }}
         ]
       },
       {
@@ -48,7 +56,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Recipe Cooker',
       template: './public/index.html',
-      filename: './index.html'
+      filename: './index.html',
+      favicon: './public/favicon.ico'
     })
   ],
   devtool: !isProduction ? 'source-map' : false

@@ -3,3 +3,34 @@
     grid-template-columns: 10em 10em;
     grid-template-rows: repeat(15);
 }
+
+.container {
+    height: 30em;
+}
+
+.card-wrapper {
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.recipe--card {
+    min-width: 15em;
+    width: 15em;
+
+    button {
+        font-size: medium;
+        margin-top: 1em;
+        min-width: 7em;
+    }
+
+    .card-title {
+        font-size: large;
+        font-weight: bold;
+    }
+
+    .card-text {
+        padding: 1em;
+    }
+}
