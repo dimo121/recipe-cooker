@@ -9,11 +9,15 @@
 
 .ingredients-table {
   display: grid;
-  grid-template-columns: 10em 10em;
-  grid-template-rows: repeat(15); }
+  grid-template-columns: 7.5em 7.5em;
+  grid-template-rows: repeat(15);
+  grid-gap: 0.5em;
+  margin: 2em 0; }
 
 .container {
-  height: 30em; }
+  height: 15em;
+  width: 20em;
+  max-width: 720px; }
 
 .card-wrapper {
   padding: 2em;
@@ -34,13 +38,14 @@
   .recipe--card .card-text {
     padding: 1em; }
 
-.center {
-  text-align: center; }
-
 .pantry-list__item {
   display: grid;
   grid-template-columns: repeat(3, 33%);
-  grid-template-rows: 2em; }
+  grid-template-rows: 2em;
+  justify-content: end; }
+  .pantry-list__item button {
+    width: 6em;
+    margin: auto; }
 
 .pantry-list {
   padding: 1em;
@@ -49,7 +54,11 @@
     margin: 1rem auto; }
 
 .pantry--btn {
-  width: 7em; }
+  width: 12em; }
+
+.pantry-input {
+  margin-top: 2em;
+  margin-right: 1em; }
 
 @media (min-width: 320px) {
   .pantry-items {
@@ -60,7 +69,20 @@
 .title {
   display: inline;
   font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: 2.5em;
+  font-size: 1.5em;
   font-style: italic;
   font-weight: bold;
-  margin-left: 1em; }
+  margin-left: 0.5em;
+  line-height: 3em; }
+
+.navbar-nav {
+  margin-left: auto;
+  text-align: end; }
+
+.nav-item {
+  padding: 0 0.8em; }
+
+@media (min-width: 360px) {
+  .title {
+    font-size: 2.5em;
+    line-height: 2em; } }

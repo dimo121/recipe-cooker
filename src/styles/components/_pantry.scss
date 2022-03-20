@@ -1,11 +1,13 @@
-.center {
-    text-align: center;
-}
-
 .pantry-list__item {
     display: grid;
     grid-template-columns: repeat(3, 33%);
     grid-template-rows: 2em;
+    justify-content: end;
+
+    button {
+        width: 6em;
+        margin: auto;
+    }
 }
 
 .pantry-list {
@@ -18,7 +20,12 @@
 }
 
 .pantry--btn {
-    width: 7em;
+    width: 12em;
+}
+
+.pantry-input {
+    margin-top: 2em;
+    margin-right: 1em;
 }
 
 @media (min-width: 320px) {

@@ -20,7 +20,7 @@ export const HistoryComp: React.FC<IHistoryCompProps> = (props) => {
         <div className="card history--card">
             <p className="card-title card-header">Recipe: {recipeName}</p>
             <p className="card-text">Time cooked: {timeCooked}</p>
-            <h4>Ingredients used:</h4>
+            <h3>Ingredients used:</h3>
             <div className="ingredients-table">
                 <label htmlFor="ing3">Name: </label>
                 <label htmlFor="ing4">Quantity: </label>

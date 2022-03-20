@@ -40,7 +40,7 @@ export const Header: React.FC = () => {
                 </span>
             </button>
             <div className="collapse navbar-collapse" id="navbarText">
-                <ul className="navbar-nav mr-auto">
+                <ul className="navbar-nav">
                     <li className="nav-item active">
                         <NavLink to="/" className="nav-link">
                             History

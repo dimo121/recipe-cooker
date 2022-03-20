@@ -1,11 +1,15 @@
 .ingredients-table {
     display: grid;
-    grid-template-columns: 10em 10em;
+    grid-template-columns: 7.5em 7.5em;
     grid-template-rows: repeat(15);
+    grid-gap: 0.5em;
+    margin: 2em 0;
 }
 
 .container {
-    height: 30em;
+    height: 15em;
+    width: 20em;
+    max-width: 720px;
 }
 
 .card-wrapper {

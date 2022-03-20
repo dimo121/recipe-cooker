@@ -15,6 +15,8 @@ export const Pantry: React.FC = () => {
     const onAddItem = () => {
         const quantityNum = parseInt(quantity);
 
+        const newObject = Object.assign({}, ingredientsState.ingredients);
+
         dispatch(
             ingredientSlice.actions.addIngredient({
                 name,
@@ -22,11 +24,12 @@ export const Pantry: React.FC = () => {
             })
         );
 
-        const newObject = Object.assign({}, ingredientsState.ingredients);
-
         newObject[name] = quantityNum;
 
         localStorage.setItem('ingredients', JSON.stringify(newObject));
+
+        setName('');
+        setQuantity('');
     };
 
     const onRemoveItem = (e: any) => {
@@ -36,9 +39,9 @@ export const Pantry: React.FC = () => {
 
         const searchName = nameElement!.innerHTML;
 
-        dispatch(ingredientSlice.actions.removeIngredient(searchName));
-
         const newObject = Object.assign({}, ingredientsState.ingredients);
+
+        dispatch(ingredientSlice.actions.removeIngredient(searchName));
 
         delete newObject[searchName];
 
@@ -47,11 +50,11 @@ export const Pantry: React.FC = () => {
 
     return (
         <div>
-            <div className="center" style={{ margin: '1em 0' }}>
-                <h1>Pantry</h1>
+            <div className="center flex-center" style={{ margin: '1em 0' }}>
+                <h1 className="title-underline">Pantry</h1>
             </div>
             <div className="pantry-list">
-                <div className="pantry-list__items">
+                <div className="pantry-list__items center">
                     {Object.keys(ingredientsState.ingredients).map(
                         (keyName, idx) => {
                             return (
@@ -62,7 +65,6 @@ export const Pantry: React.FC = () => {
                                     </p>
                                     <button
                                         className="btn btn-outline-secondary btn-lg"
-                                        style={{ width: '6em' }}
                                         onClick={onRemoveItem}
                                     >
                                         Remove
@@ -72,7 +74,7 @@ export const Pantry: React.FC = () => {
                         }
                     )}
                 </div>
-                <div className="center">
+                <div className="pantry-input center">
                     <input
                         type="text"
                         value={name}
@@ -91,11 +93,9 @@ export const Pantry: React.FC = () => {
                     ></input>
                 </div>
             </div>
-            <br />
-            <br />
-            <div className="center">
+            <div className="flex-center center">
                 <button
-                    className="btn btn-primary btn-lg pantry--btn"
+                    className="btn btn-primary btn-lg custom--btn pantry--btn"
                     onClick={onAddItem}
                 >
                     Add Item

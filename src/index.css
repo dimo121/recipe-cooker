@@ -18,3 +18,21 @@ body {
 .center {
     text-align: center;
 }
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+
+.title-underline {
+    width: 24rem;
+    padding-bottom: 1em;
+    margin-bottom: 1.5em;
+    border-bottom: 3px solid grey;
+}
+
+.custom--btn {
+    font-size: 1em;
+    width: 16em;
+    height: 2.2em;
+}

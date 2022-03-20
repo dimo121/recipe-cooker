@@ -14,8 +14,11 @@ export const Cooker: React.FC = () => {
     return (
         <div className="cooker-wrapper">
             <div className="recipes-history">
-                <div style={{ textAlign: 'center', margin: '1em 0' }}>
-                    <h1>Cooking History</h1>
+                <div
+                    className="center flex-center"
+                    style={{ marginTop: '2em' }}
+                >
+                    <h1 className="title-underline">Cooking History</h1>
                 </div>
                 <div className="card-wrapper">
                     {historyState.history &&
