@@ -7,9 +7,10 @@
 }
 
 .container {
-    height: 15em;
+    min-height: 15em;
     width: 20em;
     max-width: 720px;
+    display: block;
 }
 
 .card-wrapper {

@@ -5,7 +5,6 @@ import { historySlice } from '../slices/history';
 import { ingredientSlice } from '../slices/ingredients';
 import { recipeSlice } from '../slices/recipes';
 import { nanoid } from '@reduxjs/toolkit';
-//import { IngComp } from '../components/IngComp';
 
 interface IRecipeProps {
     recipe: Recipe;
@@ -100,7 +99,7 @@ export const RecipeComp: React.FC<IRecipeProps> = (props) => {
             <p className="card-title card-header">{name}</p>
             <p className="card-text">{method}</p>
             <h3>Ingredients :</h3>
-            <table className="table table-sm">
+            <table className="table table-responsive-sm">
                 <thead>
                     <tr>
                         <th scope="col">#</th>

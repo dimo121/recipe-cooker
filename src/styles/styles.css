@@ -15,9 +15,10 @@
   margin: 2em 0; }
 
 .container {
-  height: 15em;
+  min-height: 15em;
   width: 20em;
-  max-width: 720px; }
+  max-width: 720px;
+  display: block; }
 
 .card-wrapper {
   padding: 2em;

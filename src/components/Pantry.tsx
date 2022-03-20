@@ -17,14 +17,14 @@ export const Pantry: React.FC = () => {
 
         const newObject = Object.assign({}, ingredientsState.ingredients);
 
+        newObject[name] = quantityNum;
+
         dispatch(
             ingredientSlice.actions.addIngredient({
                 name,
                 quantity: quantityNum,
             })
         );
-
-        newObject[name] = quantityNum;
 
         localStorage.setItem('ingredients', JSON.stringify(newObject));
 
@@ -41,9 +41,9 @@ export const Pantry: React.FC = () => {
 
         const newObject = Object.assign({}, ingredientsState.ingredients);
 
-        dispatch(ingredientSlice.actions.removeIngredient(searchName));
-
         delete newObject[searchName];
+
+        dispatch(ingredientSlice.actions.removeIngredient(searchName));
 
         localStorage.setItem('ingredients', JSON.stringify(newObject));
     };
