@@ -1,8 +1,9 @@
 import React from 'react';
-//import { newIngredient } from '../types/TypeDefs';
+
+import { newIngredient } from '../types/TypeDefs';
 
 interface IngCompProps {
-    ingredient: any;
+    ingredient: newIngredient;
 }
 
 export const IngComp: React.FC<IngCompProps> = (props) => {

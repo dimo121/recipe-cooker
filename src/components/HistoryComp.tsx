@@ -9,13 +9,6 @@ interface IHistoryCompProps {
 export const HistoryComp: React.FC<IHistoryCompProps> = (props) => {
     const { recipeName, timeCooked, ingredientsUsed } = props.item;
 
-    //const [ingredientsCollection,setIngredients] = useState<Ingredients>({});
-
-    // useEffect(() => {
-
-    //     //setIngredients(ingredientsUsed);
-    // },[ingredientsUsed]);
-
     return (
         <div className="card history--card">
             <p className="card-title card-header">Recipe: {recipeName}</p>

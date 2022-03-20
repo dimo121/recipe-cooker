@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { ingredientSlice } from '../slices/ingredients';
 
@@ -9,8 +9,6 @@ export const Pantry: React.FC = () => {
     const dispatch = useAppDispatch();
 
     const ingredientsState = useAppSelector((state) => state.ingredients);
-
-    useEffect(() => {}, [dispatch]);
 
     const onAddItem = () => {
         const quantityNum = parseInt(quantity);
