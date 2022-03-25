@@ -2,11 +2,11 @@ import { Recipe } from '../types/TypeDefs';
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface recipesState {
+interface IRecipesState {
     recipes: Recipe[];
 }
 
-const initialState = { recipes: [] } as recipesState;
+const initialState = { recipes: [] } as IRecipesState;
 
 export const recipeSlice = createSlice({
     name: 'recipes',

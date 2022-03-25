@@ -2,9 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
-//const isProduction = process.env.NODE_ENV === 'production';
-
-const isProduction = false;
+const isProduction = true;
 
 module.exports = {
     entry: './src/index.tsx',

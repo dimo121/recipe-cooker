@@ -1,12 +1,11 @@
-import { Ingredients } from '../types/TypeDefs';
-import { newIngredient } from '../types/TypeDefs';
+import { Ingredients, newIngredient } from '../types/TypeDefs';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface ingredientsState {
+interface IIngredientsState {
     ingredients: Ingredients;
 }
 
-const initialState = { ingredients: {} } as ingredientsState;
+const initialState = { ingredients: {} } as IIngredientsState;
 
 export const ingredientSlice = createSlice({
     name: 'ingredients',

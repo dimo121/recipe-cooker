@@ -35,7 +35,7 @@ export const Pantry: React.FC = () => {
         const nameElement = buttonElement.previousElementSibling
             .previousElementSibling as HTMLInputElement;
 
-        const searchName = nameElement!.innerHTML;
+        const searchName = nameElement.innerHTML;
 
         const newObject = Object.assign({}, ingredientsState.ingredients);
 

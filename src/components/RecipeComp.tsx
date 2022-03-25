@@ -1,4 +1,4 @@
-import React, { useEffect, Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Recipe } from '../types/TypeDefs';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { historySlice } from '../slices/history';
@@ -18,8 +18,6 @@ export const RecipeComp: React.FC<IRecipeProps> = (props) => {
 
     const dispatch = useAppDispatch();
 
-    useEffect(() => {}, []);
-
     //check if enough ingredients are in the pantry, otherwise send error back to Recipes component
     const onRecipeCook = () => {
         const newPantryIngredients = Object.assign(
@@ -29,7 +27,7 @@ export const RecipeComp: React.FC<IRecipeProps> = (props) => {
 
         let flag = 0;
 
-        Object.keys(list).map((keyName) => {
+        Object.keys(list).forEach((keyName) => {
             if (!newPantryIngredients.hasOwnProperty(keyName)) {
                 flag = 1;
             } else if (newPantryIngredients[keyName] >= list[keyName]) {

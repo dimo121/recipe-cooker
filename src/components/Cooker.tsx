@@ -1,14 +1,9 @@
-import React, { useEffect } from 'react';
-//import { CookingHistory } from '../types/TypeDefs';
+import React from 'react';
 import { HistoryItem } from '../types/TypeDefs';
 import { HistoryComp } from './HistoryComp';
-import { useAppDispatch, useAppSelector } from '../store/store';
+import { useAppSelector } from '../store/store';
 
 export const Cooker: React.FC = () => {
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {}, [dispatch]);
-
     const historyState = useAppSelector((state) => state.history);
 
     return (
